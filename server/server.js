@@ -9,10 +9,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// 🔐 API kulcs .env-ből
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+// 📩 API endpoint
 app.post("/api/chat", async (req, res) => {
   const { message } = req.body;
 
@@ -26,10 +28,16 @@ app.post("/api/chat", async (req, res) => {
       reply: response.choices[0].message.content,
     });
   } catch (error) {
-    console.error("Error:", error.message);
-    res.status(500).json({ error: "Something went wrong with OpenAI request." });
+    console.error("Error:", error?.response?.data || error.message);
+    res.status(500).json({
+      error: "Something went wrong with OpenAI request.",
+    });
   }
 });
 
-const PORT = 5000;
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+
+// ⛔❗ FONTOS: Vercelen NINCS app.listen()
+// Lokálban a Vercel CLI indítja.
+// Ehelyett ezt exportáljuk:
+
+module.exports = app;
