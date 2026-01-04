@@ -1,12 +1,22 @@
+/* ===== LAYOUT FIX — középre igazítás minden kijelzőn ===== */
+html, body {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* ===== ALAP STÍLUSOK ===== */
 body {
   margin: 0;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: #1a1a2e;
   color: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
   padding: 1rem;
 }
 
@@ -19,8 +29,10 @@ body {
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   animation: fade-in 1s ease-in-out;
+  margin: 0 auto;          /* mindig középen */
 }
 
+/* ===== HEADER ===== */
 .header {
   background-image: url("https://i.ibb.co/vkCHdLj/grid-bg.png");
   background-size: cover;
@@ -54,6 +66,7 @@ h1:hover {
   margin-bottom: 1.5rem;
 }
 
+/* ===== CHAT UI ===== */
 .chat-container {
   display: flex;
   flex-direction: column;
@@ -116,6 +129,7 @@ h1:hover {
   animation: fade-in 0.5s ease-in;
 }
 
+/* ===== ANIMÁCIÓK ===== */
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -136,9 +150,11 @@ h1:hover {
   }
 }
 
+/* ===== MOBIL OPTIMALIZÁLÁS ===== */
 @media (max-width: 600px) {
   .App {
-    padding: 1rem;
+    padding: 1.2rem;
+    max-width: 95%;
   }
 
   h1 {

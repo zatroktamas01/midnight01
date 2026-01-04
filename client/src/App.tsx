@@ -6,16 +6,19 @@ function App() {
   const [message, setMessage] = useState("");
   const [reply, setReply] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setReply("Thinking...");
 
     try {
-      const res = await axios.post("http://localhost:5000/api/chat", {
-        message,
-      });
+      const res = await axios.post(
+        "https://midnight01.vercel.app/api/chat",   // <-- a Vercel backend
+        { message }
+      );
+
       setReply(res.data.reply);
     } catch (err) {
+      console.error(err);
       setReply("Something went wrong.");
     }
   };
@@ -35,6 +38,7 @@ function App() {
             placeholder="Ask something..."
             required
           />
+
           <button type="submit">Send</button>
         </form>
 
